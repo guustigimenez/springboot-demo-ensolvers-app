@@ -10,7 +10,7 @@ public interface NoteService {
 
     Note findNote(Long id);
 
-    Note editNote(Note note);
+    List<Note> editNote(Note note);
 
     List<Note> findAll();
 

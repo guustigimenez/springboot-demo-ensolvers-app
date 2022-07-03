@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class NoteServiceImpl implements NoteService {
             if(Objects.nonNull(user)){
                 user.addNote(note);
             }
+            note.setLastEdited(Date.from(Instant.now()));
         }catch (NotFoundException e){
             throw new NotFoundException("No se encontró al usuario");
         }
@@ -46,10 +48,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public Note editNote(Note note) {
+    public List<Note> editNote(Note note) {
         try {
             findNote(note.getId());
-            return notesRepository.save(note);
+            notesRepository.save(note);
+            return findAll();
         }catch (Exception e){
             throw new NotFoundException("Error al intentar editar la nota");
         }

@@ -7,6 +7,10 @@ import lombok.Setter;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,6 +36,10 @@ public class Note {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_edited")
+    private Date lastEdited;
 
     public Note() {
     }
@@ -89,5 +97,13 @@ public class Note {
 
     public void setFav(boolean fav) {
         isFav = fav;
+    }
+
+    public Date getLastEdited() {
+        return lastEdited;
+    }
+
+    public void setLastEdited(Date lastEdited) {
+        this.lastEdited = lastEdited;
     }
 }

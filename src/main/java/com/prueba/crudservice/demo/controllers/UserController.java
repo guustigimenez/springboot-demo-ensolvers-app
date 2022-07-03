@@ -16,13 +16,13 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    @CrossOrigin(origins = "https://jdb-prueba-android.web.app")
     @PostMapping
     private ResponseEntity<User> addUser(@RequestBody User user){
         return ResponseEntity.ok(userService.addUser(user));
     }
-
-    @GetMapping("/login")
+    @CrossOrigin(origins = "https://jdb-prueba-android.web.app")
+    @PostMapping("/login")
     private ResponseEntity<?> login(@RequestBody LoginDTO userData){
         return ResponseEntity.ok(userService.login(userData));
     }
